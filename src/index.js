@@ -1,7 +1,7 @@
 module.exports = function toReadable (number) {
     let fromZeroToNine = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
     let fromTenToNineteen = ['ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fiveteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'];
-    let fromTwentyToNinety = ['', '', 'twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
+    let fromTwentyToNinety = ['', 'ten', 'twenty', 'thirty', 'fourty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety'];
     let hundred = 'hundred';
     let firstNum = Number(number.toString()[0]);
     let secondNum = Number(number.toString()[1]);
@@ -12,12 +12,16 @@ module.exports = function toReadable (number) {
             result = fromZeroToNine[number];
         } else if (number >= 10 && number <= 19) {
             result = fromTenToNineteen[secondNum];
-        } else if (number > 19 && number < 100) {
-            result = `${fromTwentyToNinety[firstNum]} ${fromZeroToNineteen[secondNum]}`;
-        } else if (number >= 100 && number <= 999 && thirdNum === 0) {
+        } else if (number > 19 && number < 100 && secondNum !== 0) {
+            result = `${fromTwentyToNinety[firstNum]} ${fromZeroToNine[secondNum]}`;
+        } else if (number > 19 && number < 100 && secondNum === 0) {
+            result = fromTwentyToNinety[firstNum];
+        } else if (number >= 100 && number <= 999 && secondNum === 0 && thirdNum === 0) {
             result = `${fromZeroToNine[firstNum]} ${hundred} ${fromTwentyToNinety[thirdNum]}`;
-        } else if (number >= 100 && number <= 999 && thirdNum !== 0) {
-            result = `${fromZeroToNine[firstNum]} ${hundred} ${fromTwentyToNinety[thirdNum]} ${fromZeroToNine[thirdNum]}`;
-        };
+        } else if (number >= 100 && number <= 999 && secondNum === 0 && thirdNum !== 0) {
+            result = `${fromZeroToNine[firstNum]} ${hundred} ${fromZeroToNine[thirdNum]}`;
+        } else if (number >= 100 && number <= 999 && secondNum !== 0 && thirdNum === 0) {
+            result = `${fromZeroToNine[firstNum]} ${hundred} ${fromTwentyToNinety[secondNum]}`;
+        }
     return result
     };
