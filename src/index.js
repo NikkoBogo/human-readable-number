@@ -8,10 +8,10 @@ module.exports = function toReadable (number) {
     let fourthNum = Number(number.toString()[3]);
     let result;
         if (number >= 0 && number <= 19) {
-            result = fromZeroToTwenty[number];
+            result = fromZeroToNineteen[number];
         } else if (number > 19 && number < 100) {
-            result = `${fromTwentyToNinety[firstNum]} ${fromZeroToNinety[secondNum]}`;
+            result = `${fromTwentyToNinety[firstNum]} ${fromZeroToNineteen[secondNum]}`;
         } else if (number >= 100 && number < 1000) {
-            result = `${fromTwentyToNinety[firstNum]} ${hundred} ${fromTwentyToNinety[thirdNum]} ${fromTwentyToNinety[fourthNum]}`};
+            result = `${fromZeroToNineteen[firstNum]} ${hundred} ${fromTwentyToNinety[thirdNum]} ${fromZeroToNineteen[fourthNum]}`};
     return result
     };
