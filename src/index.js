@@ -22,8 +22,10 @@ module.exports = function toReadable (number) {
             result = `${fromZeroToNine[firstNum]} ${hundred} ${fromZeroToNine[thirdNum]}`;
         } else if (number >= 100 && number <= 999 && secondNum !== 0 && thirdNum === 0) {
             result = `${fromZeroToNine[firstNum]} ${hundred} ${fromTwentyToNinety[secondNum]}`;
-        } else if (number >= 100 && number <= 999 && secondNum !== 0 && thirdNum !== 0) {
+        } else if (number >= 120 && number <= 999 && secondNum !== 0 && thirdNum !== 0) {
             result = `${fromZeroToNine[firstNum]} ${hundred} ${fromTwentyToNinety[secondNum]} ${fromZeroToNine[thirdNum]}`;
+        } else if (number > 100 && number <= 119 && secondNum !== 0) {
+            result = `${fromZeroToNine[firstNum]} ${hundred} ${fromTenToNineteen[thirdNum]}`;
         }
     return result
     };
